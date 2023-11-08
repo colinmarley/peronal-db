@@ -12,7 +12,7 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
+  initialRouteName: 'dashboard',
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -42,6 +42,7 @@ export default function RootLayout() {
   return <RootLayoutNav />;
 }
 
+// This is the root navigation tree for your app.
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
@@ -50,6 +51,7 @@ function RootLayoutNav() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+        <Stack.Screen name="dashboard" options={{ headerShown: false }} />
       </Stack>
     </ThemeProvider>
   );

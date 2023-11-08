@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 
+// This is a catch-all route for displaying a 404 message.
 export default function NotFoundScreen() {
   return (
     <>
