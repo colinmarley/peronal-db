@@ -3,18 +3,30 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, View } from '../../components/Themed';
 import { getDummyValue } from '../../firebase/firebaseConfig';
+import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
+import CoffeeList from '../../components/coffee/CoffeeList';
+import { CoffeeRoastModel, coffeeRoastConverter } from '../../models/CoffeeRoastModel';
+import { CoffeeClient } from '../../clients/coffeeClient';
 
 interface DashboardProps {
   header: string;
 }
 
 const Dashboard: React.FC<DashboardProps> = ({ header }) => {
-  let testValue = "Testing 123";
-  function getTestValue() {
-    getDummyValue().then((value) => {
-      testValue = value;
+
+  // create a state variable to hold the test value
+  const [testValue, setTestValue] = React.useState('Testing 123');
+  const [coffeeRoasts, setCoffeeRoasts] = React.useState<CoffeeRoastModel[]>([]);
+
+
+  const coffeeClient = new CoffeeClient();
+
+  async function getTestValue() {
+    await getDummyValue().then((result) => {
+      setTestValue(result);
     });
   }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{header}</Text>
@@ -23,7 +35,7 @@ const Dashboard: React.FC<DashboardProps> = ({ header }) => {
       <TouchableOpacity onPress={getTestValue}>
         <Text>{testValue}</Text>
       </TouchableOpacity>
-
+      <CoffeeList />
     </View>
   );
 };
